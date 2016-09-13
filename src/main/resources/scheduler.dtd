@@ -1,0 +1,19 @@
+<!ELEMENT scheduler (quartz-config,tasks)>
+<!ELEMENT quartz-config (property*)>
+<!ELEMENT property EMPTY>
+<!ATTLIST property
+        key CDATA #REQUIRED
+        value CDATA #REQUIRED>
+<!ELEMENT tasks (task*)>
+<!ELEMENT task (method*)>
+<!ATTLIST task
+        id CDATA #REQUIRED
+        class CDATA #REQUIRED>
+<!ELEMENT method (param*)>
+<!ATTLIST method
+        name CDATA #REQUIRED
+        cronExpression CDATA #REQUIRED>
+<!ELEMENT param EMPTY>
+<!ATTLIST param
+        value CDATA #REQUIRED
+        type (byte|short|int|long|boolean|float|double|char|string) string>

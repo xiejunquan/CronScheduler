@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE scheduler SYSTEM "scheduler.dtd">
+<scheduler>
+    <quartz-config>
+        <property key="org.quartz.scheduler.instanceName" value="DefaultQuartzScheduler"></property>
+        <property key="org.quartz.scheduler.rmi.export" value="false"></property>
+        <property key="org.quartz.scheduler.rmi.proxy" value="false"></property>
+        <property key="org.quartz.scheduler.wrapJobExecutionInUserTransaction" value="false"></property>
+        <property key="org.quartz.threadPool.threadCount" value="20"></property>
+        <property key="org.quartz.threadPool.threadPriority" value="5"></property>
+        <property key="org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread" value="true"></property>
+        <property key="org.quartz.jobStore.misfireThreshold" value="60000"></property>
+    </quartz-config>
+    <tasks>
+        <task id="service" class="Service">
+            <method name="get"  cronExpression="0/20 * * * * ?">
+                <param value="1" type="int"></param>
+                <param value="name" type="string"></param>
+            </method>
+            <method name="pop"  cronExpression="0/10 * * * * ?"></method>
+        </task>
+    </tasks>
+</scheduler>
