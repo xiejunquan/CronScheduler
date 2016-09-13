@@ -14,7 +14,7 @@ public class Main {
 
         Thread.sleep(1000 * 60);
 
-        scheduler.destory();
+        scheduler.destroy();
 
     }
 }

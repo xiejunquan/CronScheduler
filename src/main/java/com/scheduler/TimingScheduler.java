@@ -48,6 +48,9 @@ public class TimingScheduler {
         List<TaskConfig> taskConfigs = schedulerConfig.getTaskConfigs();
         for (int group = 0; group < taskConfigs.size(); group++) {
             TaskConfig taskConfig = taskConfigs.get(group);
+
+            TimingJobFactory.put(taskConfig, beanFactory);
+
             String id = taskConfig.getId();
             String clazzName = taskConfig.getClazz();
             List<TaskConfig.MethodConfig> methodConfigs = taskConfig.getMethodConfigs();
@@ -55,14 +58,11 @@ public class TimingScheduler {
                 TaskConfig.MethodConfig methodConfig = methodConfigs.get(trig);
                 String methodName = methodConfig.getName();
                 String cronExpression = methodConfig.getCronExpression();
-                List<TaskConfig.Param> methodParams = methodConfig.getParams();
 
                 JobDataMap jobDataMap = new JobDataMap();
                 jobDataMap.put("id", id);
                 jobDataMap.put("clazzName", clazzName);
                 jobDataMap.put("methodName", methodName);
-                jobDataMap.put("methodParams", methodParams);
-                jobDataMap.put("beanFactory", beanFactory);
 
                 JobDetail job = JobBuilder.newJob(TimingJob.class)
                         .withIdentity("job" + trig, "group" + group)
@@ -88,7 +88,7 @@ public class TimingScheduler {
         }
     }
 
-    public void destory(){
+    public void destroy(){
         try {
             scheduler.shutdown();
         } catch (SchedulerException e) {
