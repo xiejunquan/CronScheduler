@@ -3,6 +3,7 @@ package com.scheduler.conf;
 import java.util.List;
 
 /**
+ * 配置文件的Scheduler信息
  * @author 谢俊权
  * @create 2016/9/12 10:23
  */

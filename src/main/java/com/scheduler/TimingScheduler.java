@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * 定时器
  * @author 谢俊权
  * @create 2016/9/12 16:42
  */

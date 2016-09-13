@@ -1,6 +1,7 @@
 package com.scheduler.conf;
 
 /**
+ * 配置的属性名称枚举
  * @author 谢俊权
  * @create 2016/9/12 10:14
  */

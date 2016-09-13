@@ -1,6 +1,7 @@
 package com.scheduler;
 
 /**
+ * bean工厂, 用于获取配置的类实例
  * @author 谢俊权
  * @create 2016/9/12 17:04
  */

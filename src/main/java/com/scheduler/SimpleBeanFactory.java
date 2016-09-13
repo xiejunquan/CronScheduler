@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 默认的bean工厂, 直接new无参构造函数
  * @author 谢俊权
  * @create 2016/9/12 17:06
  */

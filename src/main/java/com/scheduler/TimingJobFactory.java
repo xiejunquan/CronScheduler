@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 定时器执行类的工厂
  * @author 谢俊权
  * @create 2016/9/12 16:40
  */

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 方法参数可选的参数枚举
  * @author 谢俊权
  * @create 2016/9/13 10:09
  */

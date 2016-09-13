@@ -3,6 +3,7 @@ package com.scheduler.conf;
 import java.util.Properties;
 
 /**
+ * quartz配置信息
  * @author 谢俊权
  * @create 2016/9/12 9:56
  */

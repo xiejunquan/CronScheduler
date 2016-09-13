@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 定时器的执行类, 根据配置执行类方法
  * @author 谢俊权
  * @create 2016/9/12 17:30
  */

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 解析static配置文件
+ * 解析scheduler配置文件
  *
  * @author 谢俊权
  * @create 2016/1/30 20:20
