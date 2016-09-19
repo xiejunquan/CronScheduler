@@ -1,4 +1,4 @@
-package com.scheduler.conf;
+package com.scheduler.configure;
 
 /**
  * 配置的属性名称枚举

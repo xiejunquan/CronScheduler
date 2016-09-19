@@ -1,4 +1,4 @@
-package com.scheduler.conf;
+package com.scheduler.configure;
 
 import java.util.EnumSet;
 import java.util.HashMap;

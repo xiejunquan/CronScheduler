@@ -1,6 +1,6 @@
 package com.scheduler;
 
-import com.scheduler.conf.TaskConfig;
+import com.scheduler.configure.TaskConfig;
 import org.quartz.*;
 import org.quartz.spi.JobFactory;
 import org.quartz.spi.TriggerFiredBundle;

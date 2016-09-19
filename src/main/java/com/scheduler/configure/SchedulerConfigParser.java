@@ -1,6 +1,5 @@
-package com.scheduler.conf;
+package com.scheduler.configure;
 
-import com.sun.org.apache.xerces.internal.impl.Constants;
 import org.dom4j.Document;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
@@ -35,7 +34,7 @@ public class SchedulerConfigParser {
         org.dom4j.Element root = null;
         try{
             SAXReader reader = new SAXReader();
-            reader.setFeature(Constants.XERCES_FEATURE_PREFIX + Constants.LOAD_EXTERNAL_DTD_FEATURE, false);
+            reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
             String url = ClassLoader.getSystemResource(configFileName).getPath();
             Document document = reader.read(url.substring(1));
             root = document.getRootElement();

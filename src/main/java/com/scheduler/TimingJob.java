@@ -1,6 +1,6 @@
 package com.scheduler;
 
-import com.scheduler.conf.TaskConfig;
+import com.scheduler.configure.TaskConfig;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

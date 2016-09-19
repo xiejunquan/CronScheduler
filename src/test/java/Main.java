@@ -1,4 +1,3 @@
-import com.scheduler.SimpleBeanFactory;
 import com.scheduler.TimingScheduler;
 
 /**
@@ -9,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        TimingScheduler scheduler = new TimingScheduler("scheduler.xml", new SimpleBeanFactory());
+        TimingScheduler scheduler = new TimingScheduler("scheduler.xml");
         scheduler.start();
 
         Thread.sleep(1000 * 60);

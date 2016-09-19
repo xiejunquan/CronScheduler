@@ -1,8 +1,9 @@
 package com.scheduler;
 
-import com.scheduler.conf.SchedulerConfig;
-import com.scheduler.conf.TaskConfig;
-import com.scheduler.conf.SchedulerConfigParser;
+import com.scheduler.annotation.AnnotationScanner;
+import com.scheduler.configure.SchedulerConfig;
+import com.scheduler.configure.TaskConfig;
+import com.scheduler.configure.SchedulerConfigParser;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
@@ -26,6 +27,10 @@ public class TimingScheduler {
 
     private BeanFactory beanFactory;
 
+    public TimingScheduler(String configName) {
+        this(configName, new SimpleBeanFactory());
+    }
+
     public TimingScheduler(String configName, BeanFactory beanFactory) {
         SchedulerConfigParser parser = new SchedulerConfigParser(configName);
         this.schedulerConfig = parser.get();
@@ -38,7 +43,7 @@ public class TimingScheduler {
             Properties properties = this.schedulerConfig.getQuartzConfig().getProperties();
             SchedulerFactory sf = new StdSchedulerFactory(properties);
             this.scheduler = sf.getScheduler();
-            scheduler.setJobFactory(new TimingJobFactory());
+            this.scheduler.setJobFactory(new TimingJobFactory());
         } catch (SchedulerException e) {
             throw new RuntimeException(e);
         }
@@ -47,6 +52,8 @@ public class TimingScheduler {
     public void start(){
 
         List<TaskConfig> taskConfigs = schedulerConfig.getTaskConfigs();
+        List<TaskConfig> annoTaskConfigs = AnnotationScanner.scan();
+        taskConfigs.addAll(annoTaskConfigs);
         for (int group = 0; group < taskConfigs.size(); group++) {
             TaskConfig taskConfig = taskConfigs.get(group);
 

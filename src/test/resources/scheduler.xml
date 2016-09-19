@@ -13,11 +13,10 @@
     </quartz-config>
     <tasks>
         <task id="service" class="Service">
-            <method name="get"  cronExpression="0/20 * * * * ?">
-                <param value="1" type="int"></param>
-                <param value="name" type="string"></param>
+            <method name="put"  cronExpression="0/30 * * * * ?">
+                <param value="1" type="string"></param>
+                <param value="ha" type="string"></param>
             </method>
-            <method name="pop"  cronExpression="0/10 * * * * ?"></method>
         </task>
     </tasks>
 </scheduler>
