@@ -9,6 +9,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -27,21 +28,32 @@ public class TimingScheduler {
 
     private BeanFactory beanFactory;
 
+    public TimingScheduler() {
+        this(null);
+    }
+
     public TimingScheduler(String configName) {
         this(configName, new SimpleBeanFactory());
     }
 
     public TimingScheduler(String configName, BeanFactory beanFactory) {
-        SchedulerConfigParser parser = new SchedulerConfigParser(configName);
-        this.schedulerConfig = parser.get();
+        if(configName != null){
+            SchedulerConfigParser parser = new SchedulerConfigParser(configName);
+            this.schedulerConfig = parser.get();
+        }
         this.beanFactory = beanFactory;
         initScheduler();
     }
 
     protected void initScheduler(){
         try {
-            Properties properties = this.schedulerConfig.getQuartzConfig().getProperties();
-            SchedulerFactory sf = new StdSchedulerFactory(properties);
+            SchedulerFactory sf = null;
+            if(schedulerConfig == null){
+                sf = new StdSchedulerFactory();
+            }else{
+                Properties properties = this.schedulerConfig.getQuartzConfig().getProperties();
+                sf = new StdSchedulerFactory(properties);
+            }
             this.scheduler = sf.getScheduler();
             this.scheduler.setJobFactory(new TimingJobFactory());
         } catch (SchedulerException e) {
@@ -51,9 +63,13 @@ public class TimingScheduler {
 
     public void start(){
 
-        List<TaskConfig> taskConfigs = schedulerConfig.getTaskConfigs();
-        List<TaskConfig> annoTaskConfigs = AnnotationScanner.scan();
-        taskConfigs.addAll(annoTaskConfigs);
+        List<TaskConfig> taskConfigs = new ArrayList<>();
+        if(schedulerConfig != null){
+            List<TaskConfig> configTasks = schedulerConfig.getTaskConfigs();
+            taskConfigs.addAll(configTasks);
+        }
+        List<TaskConfig> annotateTasks = AnnotationScanner.scan();
+        taskConfigs.addAll(annotateTasks);
         for (int group = 0; group < taskConfigs.size(); group++) {
             TaskConfig taskConfig = taskConfigs.get(group);
 
