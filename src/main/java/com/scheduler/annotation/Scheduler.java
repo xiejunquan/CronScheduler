@@ -11,8 +11,8 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Crontab {
+public @interface Scheduler {
 
-    String value();
+    String cron() default "";
     String[] params() default {};
 }

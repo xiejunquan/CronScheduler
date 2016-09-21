@@ -1,4 +1,4 @@
-import com.scheduler.annotation.Crontab;
+import com.scheduler.annotation.Scheduler;
 
 /**
  * @author 谢俊权
@@ -6,12 +6,12 @@ import com.scheduler.annotation.Crontab;
  */
 public class Service {
 
-    @Crontab(value = "0/20 * * * * ?", params = {"2", "hello"})
+    @Scheduler(cron = "0/20 * * * * ?", params = {"2", "hello"})
     public void put(int id, String name){
         System.out.println(System.currentTimeMillis() + "service put id:" + id + ", name:" + name);
     }
 
-    @Crontab("0/10 * * * * ?")
+    @Scheduler(cron = "0/10 * * * * ?")
     public void pop(){
         System.out.println(System.currentTimeMillis() + "service pop ");
     }

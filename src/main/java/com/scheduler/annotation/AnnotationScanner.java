@@ -2,6 +2,7 @@ package com.scheduler.annotation;
 
 import com.scheduler.configure.ParamType;
 import com.scheduler.configure.TaskConfig;
+import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,9 +42,14 @@ public class AnnotationScanner {
     private static List<TaskConfig.MethodConfig> getMethodConfigs(Method[] methods){
         List<TaskConfig.MethodConfig> methodConfigs = new ArrayList<>();
         for(Method method : methods){
-            Crontab crontab = method.getAnnotation(Crontab.class);
+            Scheduler crontab = method.getAnnotation(Scheduler.class);
             if(crontab != null){
-                String cronExpression = crontab.value();
+                String cronExpression = crontab.cron();
+                if(!CronExpression.isValidExpression(cronExpression)){
+                    logger.warn("cronExpression {} is invalid expression in method {}", cronExpression, method.getName());
+                    continue;
+                }
+
                 String[] params = crontab.params();
                 Class<?>[] paramClasses = method.getParameterTypes();
                 if(paramClasses.length == params.length){

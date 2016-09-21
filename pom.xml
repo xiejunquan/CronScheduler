@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>TimingScheduler</groupId>
-    <artifactId>TimingScheduler</artifactId>
+    <groupId>CronScheduler</groupId>
+    <artifactId>CronScheduler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <build>
         <plugins>
@@ -19,7 +19,7 @@
     </build>
     <packaging>jar</packaging>
 
-    <name>TimingScheduler</name>
+    <name>CronScheduler</name>
     <url>http://maven.apache.org</url>
 
     <properties>
