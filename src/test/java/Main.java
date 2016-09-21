@@ -1,4 +1,4 @@
-import com.scheduler.TimingScheduler;
+import com.scheduler.CronScheduler;
 
 /**
  * @author 谢俊权
@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        TimingScheduler scheduler = new TimingScheduler("scheduler.xml");
+        CronScheduler scheduler = new CronScheduler("scheduler.xml");
         scheduler.start();
 
         Thread.sleep(1000 * 60);

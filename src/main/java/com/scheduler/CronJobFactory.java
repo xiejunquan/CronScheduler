@@ -14,9 +14,9 @@ import java.util.Map;
  * @author 谢俊权
  * @create 2016/9/12 16:40
  */
-public class TimingJobFactory implements JobFactory {
+public class CronJobFactory implements JobFactory {
 
-    private static final Map<String, TimingJob> jobMap = new HashMap<>();
+    private static final Map<String, CronJob> jobMap = new HashMap<>();
 
     public Job newJob(TriggerFiredBundle bundle, Scheduler scheduler) throws SchedulerException {
 
@@ -36,7 +36,7 @@ public class TimingJobFactory implements JobFactory {
         for(TaskConfig.MethodConfig methodConfig : methodConfigs){
             String methodName = methodConfig.getName();
             List<TaskConfig.Param> params = methodConfig.getParams();
-            TimingJob job = new TimingJob(id, clazz, methodName, params, beanFactory);
+            CronJob job = new CronJob(id, clazz, methodName, params, beanFactory);
             jobMap.put(getKey(id, clazz, methodName), job);
         }
     }

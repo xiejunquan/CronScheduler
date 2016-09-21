@@ -18,9 +18,9 @@ import java.util.Properties;
  * @author 谢俊权
  * @create 2016/9/12 16:42
  */
-public class TimingScheduler {
+public class CronScheduler {
 
-    private static final Logger logger = LoggerFactory.getLogger(TimingScheduler.class);
+    private static final Logger logger = LoggerFactory.getLogger(CronScheduler.class);
 
     private SchedulerConfig schedulerConfig;
 
@@ -28,15 +28,15 @@ public class TimingScheduler {
 
     private BeanFactory beanFactory;
 
-    public TimingScheduler() {
+    public CronScheduler() {
         this(null);
     }
 
-    public TimingScheduler(String configName) {
+    public CronScheduler(String configName) {
         this(configName, new SimpleBeanFactory());
     }
 
-    public TimingScheduler(String configName, BeanFactory beanFactory) {
+    public CronScheduler(String configName, BeanFactory beanFactory) {
         if(configName != null){
             SchedulerConfigParser parser = new SchedulerConfigParser(configName);
             this.schedulerConfig = parser.get();
@@ -55,7 +55,7 @@ public class TimingScheduler {
                 sf = new StdSchedulerFactory(properties);
             }
             this.scheduler = sf.getScheduler();
-            this.scheduler.setJobFactory(new TimingJobFactory());
+            this.scheduler.setJobFactory(new CronJobFactory());
         } catch (SchedulerException e) {
             throw new RuntimeException(e);
         }
@@ -73,7 +73,7 @@ public class TimingScheduler {
         for (int group = 0; group < taskConfigs.size(); group++) {
             TaskConfig taskConfig = taskConfigs.get(group);
 
-            TimingJobFactory.put(taskConfig, beanFactory);
+            CronJobFactory.put(taskConfig, beanFactory);
 
             String id = taskConfig.getId();
             String clazzName = taskConfig.getClazz();
@@ -88,7 +88,7 @@ public class TimingScheduler {
                 jobDataMap.put("clazzName", clazzName);
                 jobDataMap.put("methodName", methodName);
 
-                JobDetail job = JobBuilder.newJob(TimingJob.class)
+                JobDetail job = JobBuilder.newJob(CronJob.class)
                         .withIdentity("job" + trig, "group" + group)
                         .usingJobData(jobDataMap)
                         .build();

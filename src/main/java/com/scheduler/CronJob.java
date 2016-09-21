@@ -16,9 +16,9 @@ import java.util.List;
  * @author 谢俊权
  * @create 2016/9/12 17:30
  */
-public class TimingJob implements Job{
+public class CronJob implements Job{
 
-    private static final Logger logger = LoggerFactory.getLogger(TimingJob.class);
+    private static final Logger logger = LoggerFactory.getLogger(CronJob.class);
 
     private String id;
     private String clazzName;
@@ -26,7 +26,7 @@ public class TimingJob implements Job{
     private List<TaskConfig.Param> methodParams;
     private BeanFactory beanFactory;
 
-    public TimingJob(String id, String clazzName, String methodName, List<TaskConfig.Param> methodParams, BeanFactory beanFactory) {
+    public CronJob(String id, String clazzName, String methodName, List<TaskConfig.Param> methodParams, BeanFactory beanFactory) {
         this.id = id;
         this.clazzName = clazzName;
         this.methodName = methodName;
